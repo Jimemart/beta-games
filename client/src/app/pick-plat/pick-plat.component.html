@@ -1,0 +1,31 @@
+<div class="header">
+  <h3> Platforms </h3>
+  <i class="material-icons next" (click)='sendAndNext()'>navigate_next</i>
+  <!-- <button (click)='sendAndNext()'>Next</button> -->
+</div>
+<div class="deff">
+  <h4> Which platform do you use the most?</h4>
+  <p>Pick the ones you use so we can adapt the content and the sugestions to your preferences</p>
+</div>
+<div class="container">
+<div class="inline left" [attr.data-value]="48" #play>
+  <div class="inline cover back" #p1 (click)="addPlat(play,p1)">
+  </div>
+  <img src="../../assets/images/Playstation-logo.png"  height="160">
+
+</div>
+<div class="inline right" [attr.data-value]="49" #xbox>
+  <div class="inline cover back" #x1 (click)="addPlat(xbox,x1)"></div>
+  <img src="../../assets/images/xbox-one-logo.jpg" (click)="addPlat(xbox)" height="160">
+</div>
+<div class="inline left" [attr.data-value]="6" #pc>
+  <div class="inline cover bottom back" #c1 (click)="addPlat(pc,c1)"></div>
+  <img src="../../assets/images/windows-store.svg" class="bottom" (click)="addPlat(pc)" height="160">
+
+</div>
+<div class="inline right" [attr.data-value]="41" #nintendo>
+  <div class="inline cover  bottom back" #w1 (click)="addPlat(nintendo,w1)"></div>
+  <img src="../../assets/images/switch.jpg" class="bottom" (click)="addPlat(nintendo)" height="160">
+
+</div>
+</div>

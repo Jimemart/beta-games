@@ -1,0 +1,34 @@
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
+import { ActivityService } from '../services/activity.service'
+import { AuthService } from '../services/auth.service'
+import { ActivatedRoute } from '@angular/router'
+import { MomentModule } from 'angular2-moment';
+
+@Component({
+  selector: 'app-activity',
+  templateUrl: './activity.component.html',
+  styleUrls: ['./activity.component.css']
+})
+export class ActivityComponent implements OnInit {
+  
+
+  profileId:string
+  userActivities:Array<object>
+  constructor(private auth:AuthService,
+              private act:ActivityService,
+              private route:ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.params
+        .subscribe(params =>{
+          this.profileId = params['id']
+          this.act.getActivitiesFromUser(this.profileId)
+              .subscribe(acts => {
+                this.userActivities = acts
+
+              })
+        })
+  }
+
+
+}

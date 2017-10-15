@@ -1,0 +1,25 @@
+<div class="header" *ngIf="recieverUser">
+  <i class="material-icons back position" (click)="goback()">keyboard_arrow_left</i>
+  <img class="avatar position" src="../../assets/images/gerald.jpg" alt="">
+  <span class="usuarios position">{{recieverUser.username}}</span>
+</div>
+<div class="header" *ngIf="!recieverUser">
+  <i class="material-icons back position" (click)="goback()">keyboard_arrow_left</i>
+  <img class="avatar position" src="../../assets/images/gerald.jpg" alt="">
+  <span class="usuarios position">{{roomName}}</span>
+</div>
+<div  class="conversation"  id="convo">
+  <div *ngFor="let mess of convMessages">
+    <div *ngIf="mess.sender === user._id" class="mine message">
+      <p class="red">{{mess.message}}</p>
+    </div>
+    <div *ngIf="mess.sender !== user._id" class="other message">
+      <p class="gray"><span *ngIf="mess.nameOfSender" class="senderName">{{mess.nameOfSender}}: </span><br *ngIf="mess.nameOfSender" />{{mess.message}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="write">
+<input type="text" #message>
+<i class="material-icons send" (click) = "sendMessage(message, convo)">chevron_right</i>
+</div>
