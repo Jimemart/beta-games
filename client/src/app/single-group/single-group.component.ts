@@ -24,12 +24,13 @@ export class SingleGroupComponent implements OnInit {
   usersInGroup:Array<string>
   groupUsers:Array<object>
 
-  loggedUser:object = this.auth.user
+  loggedUser:object
   isUserInGroup:boolean = false
 
   ngOnInit() {
     this.auth.isLoggedIn()
         .subscribe(user =>{
+          this.loggedUser = user
           this.route.params
               .subscribe((params)=> {
                 this.groupId = params['id']
@@ -46,7 +47,6 @@ export class SingleGroupComponent implements OnInit {
         .subscribe(group =>{
           this.groupInf = group
           this.usersInGroup = this.groupInf['users']
-          console.log(this.groupInf)
           this.groupUsers = []
           this.usersInGroup.forEach(user =>{
              this.add.searchProfile(user)

@@ -29,13 +29,17 @@
 </a>
 </div>
 <div class="icons">
+  <a [routerLink]="['/browse']">
   <i class="material-icons nav-bar">explore</i>
+</a>
 </div>
 <div class="icons">
+  <a [routerLink]="['/contact']">
   <i class="material-icons nav-bar">chat_bubble_outline</i>
+</a>
 </div>
-<div class="icons">
-  <a [routerLink]="['/profile']">
+<div class="icons" *ngIf="loggedUser">
+  <a [routerLink]="['/profile', loggedUser._id]">
   <i class="material-icons nav-bar">perm_identity</i>
 </a>
 </div>

@@ -53,7 +53,7 @@ export class BrowserComponent implements OnInit {
     this.getList.browseGroups(this.searchBar)
                 .subscribe(users =>{
                   this.foundGroups = users
-                  console.log(this.foundGroups)
+                
                 })
   }
 

@@ -35,12 +35,6 @@ export class ProfileComponent implements OnInit {
             this.loadProfile()
           })
 
-    // this.route.params
-    //     .subscribe((params)=> {
-    //       this.profileId = params['id']
-    //       this.getUserGroups(this.profileId)
-    //     })
-    // this.getGames(this.profileUser['games'])
   }
 
   loadProfile(){
@@ -65,11 +59,11 @@ export class ProfileComponent implements OnInit {
 
   getGames(gamesArr){
     gamesArr.forEach(e =>{
-      this.add.findGame(e)
+      this.add.findInDb(e)
               .subscribe(game =>{
-                if(game[0]){
-                this.add.turnPic(game)
-                this.add.bigScreenshot(game[0].screenshots)
+                if(game){
+                this.add.turnPic([game])
+                this.add.bigScreenshot(game.screenshots)
                 this.userGames.push(game)
               }
               })

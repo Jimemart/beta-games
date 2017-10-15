@@ -77,10 +77,10 @@
 <div class="content">
 <div class="usergames" *ngIf="contenido === 'games'">
   <div *ngFor="let game of userGames" class="game-inf">
-    <a [routerLink] = '["/game", game[0].id]'>
-    <img [src] = "game[0].screenshots[0].url" height="93" width="156">
+    <a [routerLink] = '["/game", game.id]'>
+    <img [src] = "game.screenshots[0].url" height="93" width="156">
       </a>
-    <h5>{{game[0].name}}</h5>
+    <h5>{{game.name}}</h5>
   </div>
 </div>
 <div *ngIf="contenido === 'activity'">
