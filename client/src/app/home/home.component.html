@@ -10,7 +10,7 @@
    <ul class="content">
     <li *ngFor="let g of userGames">
       <div [attr.data-value]="g.id" (click)="goToPage(game)" #game>
-        <img [src] = 'g.cover.url' height="106">
+        <img [src] = 'g.cover' height="106">
       </div>
     </li>
    </ul>

@@ -31,25 +31,37 @@ export class GamePageComponent implements OnInit {
               public act: ActivityService) { }
 
   ngOnInit() {
-    this.loggedUser = this.auth.user
-    this.route.params
-      .subscribe((params) => this.gameId = Number(params['id']));
-    this.getMainGame(this.gameId)
-    this.getUsers(this.gameId)
-    this.checkIfUserHasThisGame(this.gameId)
-    this.getGroupsOfGame(this.gameId)
+    this.auth.isLoggedIn()
+          .subscribe(user =>{
+            this.loggedUser = user
+            this.route.params
+              .subscribe((params) => this.gameId = Number(params['id']));
+            this.getMainGame(this.gameId)
+            this.getUsers(this.gameId)
+            this.checkIfUserHasThisGame(this.gameId)
+            this.getGroupsOfGame(this.gameId)
+          })
+
 
   }
 
 getMainGame(id){
-  this.add.findGame(id)
-      .subscribe(game =>{
-        this.add.turnPic(game)
-        this.add.bigScreenshot(game[0].screenshots)
-        this.game = game
-        this.checkPlatforms(this.game)
+  this.add.findInDb(id).subscribe(game =>{
+          if(game !== null){
+            this.add.turnPic([game])
+            this.add.bigScreenshot(game.screenshots)
+            this.game = game
+            this.checkPlatforms(game)
 
-      })
+          }else{
+            this.add.findGame(id).subscribe(newGame=>{
+                this.game = newGame[0]
+                this.add.bigScreenshot(this.game['screenshots'])
+                this.add.saveGame(newGame[0]).subscribe()
+                this.checkPlatforms(newGame[0])
+              })
+          }
+        })
 }
 getUsers(id){
   this.add.searchUser(id)
@@ -65,8 +77,13 @@ setCurrent(elem, other){
 
 }
 checkPlatforms(game){
-
-  const platforms = game[0].release_dates
+  let platforms
+  if(game.release_dates){
+   platforms = game.release_dates
+ }
+ else{
+   platforms = game.platforms
+ }
   if(platforms.length > 1){
     this.platformsGame = 'MULTIPLATFORM'
   }else{
@@ -88,7 +105,7 @@ checkPlatforms(game){
 }
 
 checkIfUserHasThisGame(gameId){
-  this.auth.user['games'].forEach(game =>{
+  this.loggedUser['games'].forEach(game =>{
     if(game == gameId){
       this.showButton = false
     }
@@ -109,15 +126,14 @@ getGroupsOfGame(id){
   this.group.getGroupsOfSameGame(id)
             .subscribe(groups =>{
               this.groupsOfGame = groups
-              console.log(this.groupsOfGame)
             })
 }
 createObjforAct(){
   const newObj = {
-    addedUser: this.game[0]._id,
-    text:this.game[0].name,
+    addedUser: this.game['_id'],
+    text:this.game['name'],
     owner:this.loggedUser['_id'],
-    image: this.game[0].cover.url,
+    image: this.game['cover'],
     kind: 'GAME'
   }
   return newObj

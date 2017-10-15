@@ -54,7 +54,6 @@ export class GameListComponent implements OnInit {
       elem.classList.add('selected')
       cover.classList.remove('back')
     }
-    console.log(this.addService.gamesToSave)
     }
 
 

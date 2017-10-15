@@ -41,7 +41,7 @@ export class AddGameService {
   turnPic(games){
     games.forEach(game =>{
       if(game.cover !== undefined){
-      game.cover.url = game.cover.url.split("t_thumb").join("t_thumb_2x")
+      game.cover = game.cover.split("t_thumb").join("t_thumb_2x")
     }
   })
   }

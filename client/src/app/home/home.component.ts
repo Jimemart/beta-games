@@ -39,12 +39,14 @@ getRandomId(arr){
 
 getGames(gamesArr){
   gamesArr.forEach(e =>{
-    this.add.findGame(e)
+    this.add.findInDb(e)
             .subscribe(game =>{
-              if(game[0]){
-                this.add.turnPic(game)
-                this.userGames.push(game[0])
+      
+              if(game){
+                // this.add.turnPic(game)
+                this.userGames.push(game)
               }
+
             })
   })
 }
@@ -53,7 +55,7 @@ getGamesForPlat(platArr){
   platArr.forEach(plat =>{
       this.getList.getSuggestions(plat)
             .subscribe(games =>{
-              this.add.turnPic(games)
+              // this.add.turnPic(games)
               this.platRecom.push(
                 {platform : this.transPlat(plat),
                  games : games})
@@ -74,7 +76,7 @@ getInterested(gameArr){
     this.add.findGame(e)
             .subscribe(game =>{
               if(game[0]){
-                this.add.turnPic(game)
+                // this.add.turnPic(game)
                 this.youMayLike.push(game[0])
               }
             })

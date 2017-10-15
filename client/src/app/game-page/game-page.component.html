@@ -1,17 +1,17 @@
-<div *ngIf="game[0]">
+<div *ngIf="game">
 <div class="carousel">
     <div class="carousel-inner">
         <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
         <div class="carousel-item">
-            <img [src]='game[0].screenshots[0].url' height="400">
+            <img *ngIf="game.screenshots" [src]='game.screenshots[0].url' height="400">
               </div>
         <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
         <div class="carousel-item">
               <div class="information">
                 <span class="plat">{{this.platformsGame}}</span>
-                <p class="summary">{{game[0].summary}}</p>
+                <p class="summary">{{game.summary}}</p>
               </div>
-              <img [src]='game[0].screenshots[0].url'>
+              <img *ngIf="game.screenshots" [src]='game.screenshots[0].url'>
         </div>
 
         <ol class="carousel-indicators">
@@ -50,7 +50,7 @@
 </div>
 
 <div class="set" *ngIf="showButton && buttonNotClicked">
-<button  *ngIf="game[0]" class="addGame" (click)="addGameToUser(game[0].id)">Add {{game[0].name}}</button>
+<button  *ngIf="game" class="addGame" (click)="addGameToUser(game.id)">Add {{game.name}}</button>
 </div>
 
 <div class="menu">
