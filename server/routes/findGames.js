@@ -9,7 +9,6 @@ const Game = require('../models/Game')
 router.get('/findone/:id', (req,res,next)=>{
 
   const gameId = req.params.id
-  console.log(gameId)
   client.games({
     ids : [gameId],
     limit: 1

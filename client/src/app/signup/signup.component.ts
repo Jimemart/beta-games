@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit {
       this.formInfo.platforms = this.auth.platList
       const {username, password, email, games, platforms} = this.formInfo;
       if(username != "" && password != "" && email != ""){
-        console.log(`Signup with ${username} ${password} ${email}`)
         this.auth.signup(username, password,email, games, platforms)
         .map(user => this.router.navigate(['/login']))
         .subscribe();

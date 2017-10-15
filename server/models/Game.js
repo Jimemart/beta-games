@@ -7,7 +7,9 @@ const GameSchema = new Schema({
   cover : String,
   platforms : Array,
   summary : String,
-  screenshots : String
+  screenshots : Array,
+  popularity: Number,
+  slug : String,
 })
 
 const Game = mongoose.model("Game", GameSchema)

@@ -148,4 +148,31 @@ router.get('/find/groups/name/:name', (req, res, next)=>{
         })
 })
 
+router.post('/save/game', (req,res,next)=>{
+  console.log(req.body.game)
+  const newGame = new Game({
+    id: req.body.game.id,
+    name : req.body.game.name,
+    cover : req.body.game.cover.url,
+    platforms : req.body.game.release_dates,
+    summary : req.body.game.summary,
+    screenshots : req.body.game.screenshots,
+    popularity: req.body.game.popularity,
+    slug : req.body.game.slug
+  }).save()
+  .then(game => res.status(200).json(game))
+  .catch(err => {
+    throw err
+  })
+})
+
+router.get('/find/db/:id', (req,res,next)=>{
+  const gameId = req.params.id
+  Game.findOne({'id' : gameId})
+      .then(game => res.status(200).json(game))
+      .catch(err =>{
+        throw err
+      })
+})
+
 module.exports = router;

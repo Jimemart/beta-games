@@ -25,30 +25,52 @@ export class GameListComponent implements OnInit {
                 }
                 })
                 this.games = games
-
               })
 
   }
 
+  findGameObj(id){
+    let foundGame
+    this.games.forEach(game =>{
+      if(game.id == id){
+        foundGame = game
+      }
+    })
+    return foundGame
+  }
 
   showme(elem,cover){
-    let index = this.addService.gamesToAdd.indexOf(elem.getAttribute('data-value'))
+    let idOfGame = elem.getAttribute('data-value')
+    let index = this.addService.gamesToAdd.indexOf(idOfGame)
+    let indexToSave = this.addService.gamesToSave.indexOf(this.findGameObj(idOfGame))
     if(index>=0){
       this.addService.gamesToAdd.splice(index,1)
+      this.addService.gamesToSave.splice(indexToSave, 1)
       elem.classList.remove('selected')
       cover.classList.add('back')
     }else{
-      this.addService.gamesToAdd.push(elem.getAttribute('data-value'))
+      this.addService.gamesToAdd.push(idOfGame)
+      this.addService.gamesToSave.push(this.findGameObj(idOfGame))
       elem.classList.add('selected')
       cover.classList.remove('back')
     }
-
+    console.log(this.addService.gamesToSave)
     }
 
 
   sendGames(){
     this.auth.gamesList = this.addService.gamesToAdd
     this.auth.secondStep = true
+
+    this.addService.gamesToSave.forEach(game => {
+        this.addService.findInDb(game.id)
+            .subscribe(found =>{
+              if(found === null){
+                this.addService.saveGame(game)
+                  .subscribe()
+              }
+            })
+    });
   }
   searchingGames(val){
     this.nosearching = val;

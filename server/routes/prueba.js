@@ -23,6 +23,11 @@ gamesRoutes.get("/giveme/:platforms/:off/:qt", (req,res,next)=>{
 }, [
     'name',
     'cover',
+    'popularity',
+    'release_dates.platform',
+    'summary',
+    'slug',
+    'screenshots',
 ]).then(response => {
       return res.status(200).json(response.body);
   }).catch(error => {

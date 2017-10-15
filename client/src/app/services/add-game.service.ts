@@ -9,6 +9,7 @@ const BASE_URL = environment.BASE_URL
 @Injectable()
 export class AddGameService {
   gamesToAdd = []
+  gamesToSave = []
   private options = {withCredentials:true};
   constructor(public http:Http, public route: Router) { }
 
