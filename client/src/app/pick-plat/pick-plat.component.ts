@@ -25,7 +25,7 @@ export class PickPlatComponent implements OnInit {
         elem.classList.add('selected')
 
       }
-      console.log(cover)
+
   }
   sendAndNext(){
     this.auth.platList = this.myPlats
