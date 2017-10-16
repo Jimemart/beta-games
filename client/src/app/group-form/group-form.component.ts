@@ -70,6 +70,7 @@ export class GroupFormComponent implements OnInit {
       addedUser: group['_id'],
       kind: 'GROUP'
     }
+    console.log(newObj)
     return newObj
   }
 

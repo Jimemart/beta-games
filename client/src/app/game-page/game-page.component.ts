@@ -118,6 +118,7 @@ addGameToUser(gameId){
   this.edit.addGame(this.loggedUser['_id'], totalGames)
           .subscribe(user => {
             this.getUsers(this.gameId)
+            // console.log(this.createObjforAct())
             this.act.addNewAct(this.createObjforAct())
                     .subscribe()
           })
@@ -128,14 +129,16 @@ getGroupsOfGame(id){
               this.groupsOfGame = groups
             })
 }
+
 createObjforAct(){
   const newObj = {
     addedUser: this.game['_id'],
     text:this.game['name'],
     owner:this.loggedUser['_id'],
-    image: this.game['cover'],
+    image: this.game['cover'].url,
     kind: 'GAME'
   }
+console.log(newObj)
   return newObj
 }
 }

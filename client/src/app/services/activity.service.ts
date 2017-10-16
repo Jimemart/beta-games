@@ -14,6 +14,7 @@ export class ActivityService {
 
 
   addNewAct(obj){
+    console.log('en servicio', obj)
     return this.http.post(`${BASE_URL}/api/add/activity`, {newAct : obj}, this.options)
         .map((res)=>res.json())
   }
